@@ -1,0 +1,15 @@
+{
+  "name": "data_structures",
+  "version": "0.0.1",
+  "description": "this is small package that will help you to structure your data using the most popular techniques.",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node index.ts"
+  },
+  "author": "Alex Flok",
+  "license": "ISC",
+  "dependencies": {
+    "ts-node": "^10.9.1"
+  }
+}
