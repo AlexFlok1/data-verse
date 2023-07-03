@@ -66,6 +66,48 @@ class SingleLinkList {
     this._length++;
   };
 
+  public insert = (value: unknown, index: number): void => {
+    if (this._length < index || index < 0)
+      throw new Error('Index is out of range');
+    if (index === 0) {
+      this.unShift(value);
+      return;
+    }
+    if (index === this._length) {
+      this.push(value);
+      return;
+    }
+
+    const newNode = new DataNode(value);
+    const beforeNode = this.get(index - 1);
+    if (beforeNode) {
+      newNode.next = beforeNode.next;
+      beforeNode.next = newNode;
+      this._length++;
+      return;
+    }
+  };
+
+  public remove = (index: number): void => {
+    if (index >= this._length || index < 0)
+      throw new Error('Index is out of range');
+    if (index === this._length - 1) {
+      this.pop();
+      return;
+    }
+    if (index === 0) {
+      this.shift();
+      return;
+    }
+
+    const prevNode = this.get(index - 1);
+    if (prevNode && prevNode.next) {
+      prevNode.next = prevNode.next.next;
+      this._length--;
+      return;
+    }
+  };
+
   public get = (index: number = 0) => {
     if (index < 0 || index >= this._length) return;
 
