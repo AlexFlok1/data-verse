@@ -1,6 +1,6 @@
 import { DataNode } from '../models/Node';
 
-class SingleLinkList {
+class DoubleLinkList {
   private _head: DataNode | null = null;
   private _tail: DataNode | null = null;
   private _length: number = 0;
@@ -12,6 +12,7 @@ class SingleLinkList {
     if (!this._tail) {
       this._tail = this._head = newNode;
     } else {
+      newNode.prev = this._tail;
       this._tail.next = newNode;
       this._tail = newNode;
     }
@@ -22,9 +23,14 @@ class SingleLinkList {
   public pop = (): void => {
     this.edgeCases();
 
-    this._tail = this.getLastNotNull();
+    if (this._tail && this._tail.prev) {
+      this._tail = this._tail.prev;
+      this._tail.next = null;
+    }
     this._length--;
   };
+
+  /*
 
   public shift = () => {
     this.edgeCases();
@@ -129,7 +135,7 @@ class SingleLinkList {
 
     return false;
   };
-
+*/
   /*PRIVATE METHODS */
 
   private edgeCases = () => {
@@ -156,6 +162,9 @@ class SingleLinkList {
   get head() {
     return this._head;
   }
+  get tail() {
+    return this._tail;
+  }
 }
 
-export { SingleLinkList };
+export { DoubleLinkList };
