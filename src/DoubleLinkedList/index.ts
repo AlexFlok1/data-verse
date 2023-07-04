@@ -119,14 +119,19 @@ class DoubleLinkList {
       }
     }
   };
-
+  */
   public get = (index: number = 0) => {
     if (index < 0 || index >= this._length) return;
+    const tailOrHead = this._length / 2 > index ? 'head' : 'tail';
+    let returnNode = tailOrHead === 'head' ? this.head : this._tail;
 
-    let returnNode = this.head;
-    while (index > 0) {
-      if (returnNode) returnNode = returnNode.next;
-      index--;
+    let counter = tailOrHead === 'head' ? index : this._length - 1 - index;
+    console.log(this._length);
+    while (counter > 0) {
+      if (returnNode) {
+        returnNode = tailOrHead === 'head' ? returnNode.next : returnNode.prev;
+        counter--;
+      }
     }
 
     return returnNode;
@@ -141,7 +146,7 @@ class DoubleLinkList {
 
     return false;
   };
-*/
+
   /*PRIVATE METHODS */
 
   private edgeCases = () => {
@@ -152,17 +157,6 @@ class DoubleLinkList {
       this._length = 0;
       return;
     }
-  };
-
-  private getLastNotNull = () => {
-    let lastNotNullNode = this._head;
-    if (lastNotNullNode) {
-      while (lastNotNullNode.next?.next) {
-        if (lastNotNullNode.next?.next) lastNotNullNode = lastNotNullNode.next;
-      }
-      lastNotNullNode.next = null;
-    }
-    return lastNotNullNode;
   };
 
   get head() {
