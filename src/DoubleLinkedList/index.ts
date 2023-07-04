@@ -30,15 +30,16 @@ class DoubleLinkList {
     this._length--;
   };
 
-  /*
-
   public shift = () => {
     this.edgeCases();
 
     if (this.head) {
       const oldHead = this.head;
       this._head = oldHead.next;
-      this._length--;
+      if (this._head) {
+        this._head.prev = null;
+        this._length--;
+      }
     }
   };
 
@@ -49,11 +50,16 @@ class DoubleLinkList {
       return;
     }
 
-    newNode.next = this._head;
-    this._head = newNode;
+    if (this._head) {
+      newNode.next = this._head;
+      this._head.prev = newNode;
+      this._head = newNode;
 
-    this._length++;
+      this._length++;
+    }
   };
+
+  /*
 
   public insert = (value: unknown, index: number): void => {
     if (this._length < index || index < 0)
