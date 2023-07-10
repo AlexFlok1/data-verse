@@ -59,8 +59,6 @@ class DoubleLinkList {
     }
   };
 
-  /*
-
   public insert = (value: unknown, index: number): void => {
     if (this._length < index || index < 0)
       throw new Error('Index is out of range');
@@ -77,7 +75,9 @@ class DoubleLinkList {
     const beforeNode = this.get(index - 1);
     if (beforeNode) {
       newNode.next = beforeNode.next;
+      newNode.prev = beforeNode;
       beforeNode.next = newNode;
+      if (newNode.next) newNode.next.prev = newNode;
       this._length++;
       return;
     }
@@ -98,11 +98,12 @@ class DoubleLinkList {
     const prevNode = this.get(index - 1);
     if (prevNode && prevNode.next) {
       prevNode.next = prevNode.next.next;
+      if (prevNode.next) prevNode.next.prev = prevNode;
       this._length--;
       return;
     }
   };
-
+  /*
   public reverse = () => {
     let next: DataNode | null, prev: DataNode | null, node: DataNode | null;
     next = prev = node = null;
